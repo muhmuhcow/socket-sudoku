@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
  var easyPuzzleSchema = new Schema({
       "data": Array,
+      "date": Date
     });
 
   var easyPuzzleModel = mongoose.model("easyPuzzleModel",easyPuzzleSchema);
