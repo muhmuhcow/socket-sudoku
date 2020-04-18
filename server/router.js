@@ -25,5 +25,14 @@ router.get('/getPuzzle',(req,res) => {
       });
 })
 
+const getPuzzle = async () => {
+    const response = await axios.get('https://sugoku.herokuapp.com/board', {
+        params: {
+          difficulty: 'easy'
+        }   
+      });
+    //console.log(response.data)  
+    return response.data;  
+    }
 
 module.exports = router;

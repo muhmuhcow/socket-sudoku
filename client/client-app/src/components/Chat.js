@@ -4,7 +4,6 @@ const axios = require('axios').default;
 const queryString = require('query-string');
 const ENDPOINT = 'http://localhost:5000';
 
-
 const Chat = ({ location }) => {
     //initialze name state
     const [name,setName] = useState('');
@@ -14,12 +13,22 @@ const Chat = ({ location }) => {
 
         //get data from server and store to the state
         var getPuzzle = async () => {
-            const response = await axios.get(`${ENDPOINT}/getPuzzle`)
-            console.log(response)
+            const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
+                params: {
+                  difficulty: 'easy'
+                }
+              });
+            console.log(response.data)
             //return response;
         }   
         
         getPuzzle();
+
+
+        const chat = io.connect(`${ENDPOINT}/puzzle`);
+        chat.on('message', response=>{
+            console.log(response);
+          })  
 
         const {name} = queryString.parse(location.search);
         var socket = io(ENDPOINT);
