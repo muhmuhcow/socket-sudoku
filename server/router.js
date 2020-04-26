@@ -37,7 +37,7 @@ const savePuzzle = async () => {
   });
   let now = moment();
   var newPuzzle = new easyPuzzleSchema();
-      newPuzzle.data = response.data
+      newPuzzle.data = response.data.board
       newPuzzle.date = now.format();
   newPuzzle.save(function(err,data){
     if(err){console.log(err);}

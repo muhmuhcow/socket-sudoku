@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
+import Board from "./Board";
 const axios = require('axios').default;
 const queryString = require('query-string');
 const ENDPOINT = 'http://localhost:5000';
@@ -7,6 +8,7 @@ const ENDPOINT = 'http://localhost:5000';
 const Chat = ({ location }) => {
     //initialze name state
     const [name,setName] = useState('');
+    const [currentPuzzle,setCurrentPuzzle] = useState('');
     
     //called for change on ENDPOINT or url params
     useEffect (() => {
@@ -17,14 +19,12 @@ const Chat = ({ location }) => {
                 params: {
                   difficulty: 'easy'
                 }
-              });
-            console.log(response.data)
-            //return response;
+              }); 
+            setCurrentPuzzle(response.data[0].data);
         }   
-        
         getPuzzle();
 
-
+        
         const chat = io.connect(`${ENDPOINT}/puzzle`);
         chat.on('message', response=>{
             console.log(response);
@@ -35,7 +35,7 @@ const Chat = ({ location }) => {
         setName(name);
         socket.emit('join',({name}));
         
-    },[ENDPOINT],location.search)
+    },[ENDPOINT],location.search,currentPuzzle)
 
     //always called
     useEffect (() => {
@@ -46,11 +46,10 @@ const Chat = ({ location }) => {
           })
     });
 
-    
-
     return (
         <div>
             <h1> Chat </h1>
+            <Board data={currentPuzzle} />
         </div>
     );
 
