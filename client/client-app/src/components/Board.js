@@ -4,19 +4,18 @@ import Row from "./Row";
 const Board = ({ data }) => {
 
     console.log(data);
-    var rowNum = 0;
+    var rowNumber = 0;
 
     return (
         <div>
             <h1> Board </h1>
                  {//for each row      
                     Array.prototype.map.call(data, row => {
-                        rowNum=rowNum+1;
-                        return <Row data={row} key={rowNum}/>
+                        rowNumber=rowNumber+1;
+                        return <Row data={row} key={rowNumber} rowNum={rowNumber}/>
                     })
                 }
         </div>
     );
-
 }
 export default Board;
