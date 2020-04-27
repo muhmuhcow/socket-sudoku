@@ -9,6 +9,7 @@ const Chat = ({ location }) => {
     //initialze name state
     const [name,setName] = useState('');
     const [currentPuzzle,setCurrentPuzzle] = useState('');
+    const [selectedSquare,setSelectedSquare] = useState('');
     
     //called for change on ENDPOINT or url params
     useEffect (() => {
@@ -24,7 +25,6 @@ const Chat = ({ location }) => {
         }   
         getPuzzle();
 
-        
         const chat = io.connect(`${ENDPOINT}/puzzle`);
         chat.on('message', response=>{
             console.log(response);
@@ -40,18 +40,40 @@ const Chat = ({ location }) => {
     //always called
     useEffect (() => {
         var socket = io.connect(ENDPOINT);
-        console.log('yes im running')
         socket.on('message', response=>{
             console.log(response);
           })
     });
 
+    //this gets passed down to square
+    var selectSquare = squareValue => {
+        setSelectedSquare(squareValue);
+        console.log(selectedSquare);
+    }
+
+    // //this gets called on button click
+    var setSquareValue = squareValue => {
+        console.log("setSquareValue called yo!!");
+        console.log(squareValue);
+        // var colNum = selectedSquare % 10;
+        // var rowNum = (selectedSquare - colNum) / 10;
+
+        // var newBoardData = currentPuzzle;
+        // newBoardData[rowNum-1][colNum-1] = squareValue;
+
+        // //reset state of board data
+    }
+
     return (
         <div>
             <h1> Chat </h1>
-            <Board data={currentPuzzle} />
+            <Board 
+              data={currentPuzzle} 
+              selectSquare={selectSquare} 
+              setSquareValue={setSquareValue} 
+              selectedSquare={selectedSquare}
+             />
         </div>
     );
-
 }
 export default Chat;
