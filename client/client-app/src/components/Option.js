@@ -6,11 +6,9 @@ const Option = ({ value, setCurrentPuzzle, selectedSquare, data }) => {
     var handleClick = e => {
         var colNum = selectedSquare % 10;
         var rowNum = (selectedSquare - colNum) / 10;
-        var newBoardData = data;
-
-      newBoardData[rowNum-1][colNum-1] =  value;
-      setCurrentPuzzle(newBoardData);
-
+        var newBoardData = data.slice();
+        newBoardData[rowNum-1][colNum-1] =  value;
+        setCurrentPuzzle(newBoardData);
     }
 
     return (
