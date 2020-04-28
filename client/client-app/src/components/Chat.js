@@ -10,7 +10,8 @@ const Chat = ({ location }) => {
     const [name,setName] = useState('');
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
-    
+    const [, forceUpdate] = useState();
+
     //called for change on ENDPOINT or url params
     useEffect (() => {
 
@@ -25,53 +26,38 @@ const Chat = ({ location }) => {
         }   
         getPuzzle();
 
-        const chat = io.connect(`${ENDPOINT}/puzzle`);
-        chat.on('message', response=>{
-            console.log(response);
-          })  
+        // const chat = io.connect(`${ENDPOINT}/puzzle`);
+        // chat.on('message', response=>{
+        //     console.log(response);
+        //   })  
 
-        const {name} = queryString.parse(location.search);
-        var socket = io(ENDPOINT);
-        setName(name);
-        socket.emit('join',({name}));
+        // const {name} = queryString.parse(location.search);
+        // var socket = io(ENDPOINT);
+        // setName(name);
+        // socket.emit('join',({name}));
         
-    },[ENDPOINT],location.search,currentPuzzle)
+    },[])
 
     //always called
-    useEffect (() => {
-        var socket = io.connect(ENDPOINT);
-        socket.on('message', response=>{
-            console.log(response);
-          })
-    });
+    // useEffect (() => {
+    //     var socket = io.connect(ENDPOINT);
+    //     socket.on('message', response=>{
+    //         console.log(response);
+    //       })
+    // });
 
-    //this gets passed down to square
-    var selectSquare = squareValue => {
-        setSelectedSquare(squareValue);
-        console.log(selectedSquare);
-    }
-
-    // //this gets called on button click
-    var setSquareValue = squareValue => {
-        console.log("setSquareValue called yo!!");
-        console.log(squareValue);
-        // var colNum = selectedSquare % 10;
-        // var rowNum = (selectedSquare - colNum) / 10;
-
-        // var newBoardData = currentPuzzle;
-        // newBoardData[rowNum-1][colNum-1] = squareValue;
-
-        // //reset state of board data
-    }
+    useEffect (()=>{
+      setSelectedSquare(selectedSquare);
+    },[selectedSquare])
 
     return (
         <div>
             <h1> Chat </h1>
-            <Board 
-              data={currentPuzzle} 
-              selectSquare={selectSquare} 
-              setSquareValue={setSquareValue} 
-              selectedSquare={selectedSquare}
+              <Board 
+                data={currentPuzzle} 
+                setSelectedSquare={setSelectedSquare} 
+                selectedSquare={selectedSquare}
+                setCurrentPuzzle={setCurrentPuzzle}
              />
         </div>
     );
