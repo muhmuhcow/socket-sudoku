@@ -16,7 +16,6 @@ router.get('/getStuff',(req,res) => {
 router.get('/getPuzzle',(req,res) => {
   var mySort = { date: -1 }; 
   easyPuzzleSchema.find({}).sort(mySort).exec(function(err, docs) { 
-      console.log(docs);
       res.send(docs)
   });
 })

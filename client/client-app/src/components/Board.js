@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Row from "./Row";
 import Option from "./Option";
 
-const Board = ({ data, setSelectedSquare, setSquareValue, selectedSquare, setCurrentPuzzle }) => {
+const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
     var rowNumber = 0;
@@ -29,7 +29,6 @@ const Board = ({ data, setSelectedSquare, setSquareValue, selectedSquare, setCur
                             data={data} 
                             setCurrentPuzzle={setCurrentPuzzle}
                             selectedSquare={selectedSquare}
-                            data={data}
                         >
                             {buttonValue}
                         </Option>

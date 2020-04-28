@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
 import Board from "./Board";
 const axios = require('axios').default;
-const queryString = require('query-string');
+// const queryString = require('query-string');
 const ENDPOINT = 'http://localhost:5000';
+const chat = io.connect(`${ENDPOINT}/puzzle`);
 
 const Chat = ({ location }) => {
     //initialze name state
-    const [name,setName] = useState('');
+    //const [name,setName] = useState('');
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
-    const [, forceUpdate] = useState();
 
     //called for change on ENDPOINT or url params
     useEffect (() => {
@@ -26,7 +26,7 @@ const Chat = ({ location }) => {
         }   
         getPuzzle();
 
-        // const chat = io.connect(`${ENDPOINT}/puzzle`);
+       
         // chat.on('message', response=>{
         //     console.log(response);
         //   })  
@@ -39,16 +39,21 @@ const Chat = ({ location }) => {
     },[])
 
     //always called
-    // useEffect (() => {
-    //     var socket = io.connect(ENDPOINT);
-    //     socket.on('message', response=>{
-    //         console.log(response);
-    //       })
-    // });
+    useEffect (() => {
+      console.log("BEEEEP");
+      chat.on('message', response=>{
+            console.log(response);
+          });
 
-    useEffect (()=>{
-      setSelectedSquare(selectedSquare);
-    },[selectedSquare])
+      chat.emit('message',({data:currentPuzzle}));
+    },[currentPuzzle]);
+
+    //send updated puzzle to database
+    // useEffect (() => {
+    //   //var socket = io(ENDPOINT);
+    //   socket.emit('message',({currentPuzzle}));
+
+    // },[currentPuzzle]);
 
     return (
         <div>

@@ -19,16 +19,21 @@ io.on('connection', function(socket){
     socket.on('join', ({name})=>{
       newName=name;
       socket.broadcast.emit('message',`${newName} is here!`)
-    })
+    });
     socket.on('disconnect',()=>{
         console.log('user disconnected')
     })
   });
 
 const puzzle = io
-.of('/puzzle')
-.on('connection', (socket) => {
-  socket.emit('message',{serverMessage:"you just a little more"});
-});
+  .of('/puzzle')
+  .on('connection', (socket) => {
+
+    socket.emit('message',{serverMessage:"you just a little more"});
+
+    socket.on('message', ({data})=>{
+      console.log(data);
+    });
+  });
 
 server.listen(PORT, () => console.log(`Server listening on ${PORT}`));

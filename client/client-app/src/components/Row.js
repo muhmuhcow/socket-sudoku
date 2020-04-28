@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Square from './Square';
 
 const Row = ({ data, rowNum, setSelectedSquare }) => {

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './project.css';
 
 const Square = ({ rowNum, colNum, value, setSelectedSquare }) => {
 
-    const [rowNumber,setRowNumber] = useState(rowNum);
-    const [colNumber,setcolNumber] = useState(colNum);
+    const [rowNumber] = useState(rowNum);
+    const [colNumber] = useState(colNum);
     
     var handleClick = e => {
         var squareId = rowNumber*10 + colNumber;
