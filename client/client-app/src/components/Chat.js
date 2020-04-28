@@ -26,11 +26,6 @@ const Chat = ({ location }) => {
         }   
         getPuzzle();
 
-       
-        // chat.on('message', response=>{
-        //     console.log(response);
-        //   })  
-
         // const {name} = queryString.parse(location.search);
         // var socket = io(ENDPOINT);
         // setName(name);
@@ -38,22 +33,19 @@ const Chat = ({ location }) => {
         
     },[])
 
-    //always called
     useEffect (() => {
-      console.log("BEEEEP");
       chat.on('message', response=>{
-            console.log(response);
+            if(response.serverMessage){
+              console.log(response);
+            }
+            
+            if(response.data){
+              setCurrentPuzzle(response.data)
+            }
           });
-
-      chat.emit('message',({data:currentPuzzle}));
+      
+      chat.emit('puzzle',({data:currentPuzzle}));
     },[currentPuzzle]);
-
-    //send updated puzzle to database
-    // useEffect (() => {
-    //   //var socket = io(ENDPOINT);
-    //   socket.emit('message',({currentPuzzle}));
-
-    // },[currentPuzzle]);
 
     return (
         <div>

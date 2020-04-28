@@ -25,14 +25,14 @@ io.on('connection', function(socket){
     })
   });
 
-const puzzle = io
-  .of('/puzzle')
+io.of('/puzzle')
   .on('connection', (socket) => {
 
     socket.emit('message',{serverMessage:"you just a little more"});
 
-    socket.on('message', ({data})=>{
+    socket.on('puzzle', ({data})=>{
       console.log(data);
+      socket.broadcast.emit('message',{data:data});
     });
   });
 
