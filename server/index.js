@@ -31,8 +31,8 @@ io.of('/puzzle')
     socket.emit('message',{serverMessage:"you just a little more"});
 
     socket.on('puzzle', ({data})=>{
-      console.log(data);
-      socket.broadcast.emit('message',{data:data});
+      console.log("BEEEP");
+      socket.broadcast.emit('myData',{data:data});
     });
   });
 

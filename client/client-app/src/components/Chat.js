@@ -12,6 +12,18 @@ const Chat = ({ location }) => {
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
 
+    chat.on('myData', response=>{
+      if(response.serverMessage){
+        console.log(response);
+      }
+      if(response.data && 
+         !(JSON.stringify(response.data) === JSON.stringify(currentPuzzle))){
+        //console.log(response.data);
+        setCurrentPuzzle(response.data);
+      }
+        
+    });
+
     //called for change on ENDPOINT or url params
     useEffect (() => {
 
@@ -33,19 +45,9 @@ const Chat = ({ location }) => {
         
     },[])
 
-    useEffect (() => {
-      chat.on('message', response=>{
-            if(response.serverMessage){
-              console.log(response);
-            }
-            
-            if(response.data){
-              setCurrentPuzzle(response.data)
-            }
-          });
-      
-      chat.emit('puzzle',({data:currentPuzzle}));
-    },[currentPuzzle]);
+    // useEffect (() => {
+    //   chat.emit('puzzle',({data:currentPuzzle}));
+    // },[currentPuzzle]);
 
     return (
         <div>
@@ -55,6 +57,7 @@ const Chat = ({ location }) => {
                 setSelectedSquare={setSelectedSquare} 
                 selectedSquare={selectedSquare}
                 setCurrentPuzzle={setCurrentPuzzle}
+                chat={chat}
              />
         </div>
     );
