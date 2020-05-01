@@ -7,4 +7,9 @@
     width:20px;
     display:flex;
     border-style: solid;
+    border-width: thin;
+}
+
+.Row{
+    display:flex;
 }

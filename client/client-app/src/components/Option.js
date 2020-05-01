@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './project.css';
 
 const Option = ({ value, setCurrentPuzzle, selectedSquare, data, chat }) => {
 
-    var handleClick = e => {
-        console.log("BEEP");
+    var handleClick = e => { 
+        var newBoardData = data.slice();
         var colNum = selectedSquare % 10;
         var rowNum = (selectedSquare - colNum) / 10;
-        var newBoardData = data.slice();
         newBoardData[rowNum-1][colNum-1] =  value;
         setCurrentPuzzle(newBoardData);
-        chat.emit('puzzle',({data:newBoardData}), () => {
-            
+        chat.emit('puzzle',({data:newBoardData}), () => {      
         }); 
     }
 

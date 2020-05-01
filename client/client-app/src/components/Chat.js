@@ -18,7 +18,6 @@ const Chat = ({ location }) => {
       }
       if(response.data && 
          !(JSON.stringify(response.data) === JSON.stringify(currentPuzzle))){
-        //console.log(response.data);
         setCurrentPuzzle(response.data);
       }
         
@@ -44,10 +43,6 @@ const Chat = ({ location }) => {
         // socket.emit('join',({name}));
         
     },[])
-
-    // useEffect (() => {
-    //   chat.emit('puzzle',({data:currentPuzzle}));
-    // },[currentPuzzle]);
 
     return (
         <div>

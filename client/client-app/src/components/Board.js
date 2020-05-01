@@ -17,10 +17,10 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                                   setSelectedSquare={setSelectedSquare} 
                                   data={row} key={rowNumber} 
                                   rowNum={rowNumber}
+                                  selectedSquare={selectedSquare}
                                 />)
                     })
                 }
-
                 {selectedSquare ? buttonArray.map( buttonValue => {
                     return(
                         <Option 
