@@ -11,16 +11,19 @@ const Chat = ({ location }) => {
     //const [name,setName] = useState('');
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
+    const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
 
-    chat.on('myData', response=>{
-      if(response.serverMessage){
-        console.log(response);
-      }
+    chat.on('myData', response =>{
       if(response.data && 
          !(JSON.stringify(response.data) === JSON.stringify(currentPuzzle))){
         setCurrentPuzzle(response.data);
       }
-        
+    });
+
+    chat.on('mySelectedSquare', response =>{
+      if(response.squareId){
+       setOtherSelectedSquare(response.squareId);
+      }
     });
 
     //called for change on ENDPOINT or url params
@@ -53,6 +56,7 @@ const Chat = ({ location }) => {
                 selectedSquare={selectedSquare}
                 setCurrentPuzzle={setCurrentPuzzle}
                 chat={chat}
+                otherSelectedSquare={otherSelectedSquare}
              />
         </div>
     );

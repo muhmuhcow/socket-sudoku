@@ -2,7 +2,7 @@ import React from 'react';
 import Row from "./Row";
 import Option from "./Option";
 
-const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat }) => {
+const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat, otherSelectedSquare }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
     var rowNumber = 0;
@@ -18,6 +18,8 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                                   data={row} key={rowNumber} 
                                   rowNum={rowNumber}
                                   selectedSquare={selectedSquare}
+                                  chat={chat}
+                                  otherSelectedSquare={otherSelectedSquare}
                                 />)
                     })
                 }

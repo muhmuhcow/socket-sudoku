@@ -1,7 +1,7 @@
 import React from 'react';
 import Square from './Square';
 
-const Row = ({ data, rowNum, setSelectedSquare, selectedSquare }) => {
+const Row = ({ data, rowNum, setSelectedSquare, selectedSquare, chat, otherSelectedSquare }) => {
 
     var columnNumber=0;
     return (
@@ -16,6 +16,8 @@ const Row = ({ data, rowNum, setSelectedSquare, selectedSquare }) => {
                                     colNum={columnNumber} 
                                     value={square} 
                                     selectedSquare={selectedSquare}
+                                    chat={chat}
+                                    otherSelectedSquare={otherSelectedSquare}
                                 />; 
                     })
                 }

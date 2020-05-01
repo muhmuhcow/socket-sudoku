@@ -31,8 +31,12 @@ io.of('/puzzle')
     socket.emit('message',{serverMessage:"you just a little more"});
 
     socket.on('puzzle', ({data})=>{
-      console.log("BEEEP");
       socket.broadcast.emit('myData',{data:data});
+    });
+
+    socket.on('selectedSquare', ({squareId})=>{
+      console.log(`squareId: ${squareId}`);
+      socket.broadcast.emit('mySelectedSquare',{squareId:squareId});
     });
   });
 
