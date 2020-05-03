@@ -17,20 +17,18 @@
     display:flex;
 }
 
-.Row div:nth-child(3){
+/* show gridlines */
+.Row div:nth-child(3n){
     border-right: solid;
 }
-
-.Row div:nth-child(6){
-    border-right: solid;
-}
-
-.Row div:nth-child(9){
-    border-right: solid;
-}
-
 .Row div:nth-child(1){
     border-left: solid;
+}
+.Board .Row:nth-child(3n){
+    border-bottom: solid;
+}
+.Board .Row:nth-child(1){
+    border-top: solid;
 }
 
 .Board {
