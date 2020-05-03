@@ -11,6 +11,7 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .Row{
@@ -29,6 +30,20 @@
 }
 .Board .Row:nth-child(1){
     border-top: solid;
+}
+
+/* highlight squares */
+.Board .Row:nth-child(-n+3) .Square:nth-child(n+4):nth-child(-n+6){
+    background-color: rgb(224, 235, 224);
+}
+.Board .Row:nth-child(n+7):nth-child(-n+9) .Square:nth-child(n+4):nth-child(-n+6){
+    background-color: rgb(224, 235, 224);
+}
+.Board .Row:nth-child(n+4):nth-child(-n+6) .Square:nth-child(n+1):nth-child(-n+3){
+    background-color: rgb(224, 235, 224);
+}
+.Board .Row:nth-child(n+4):nth-child(-n+6) .Square:nth-child(n+7):nth-child(-n+9){
+    background-color: rgb(224, 235, 224);
 }
 
 .Board {

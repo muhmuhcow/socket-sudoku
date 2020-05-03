@@ -19,7 +19,7 @@ const Square = ({ rowNum, colNum, value, setSelectedSquare, selectedSquare, chat
         if(mySquareId === otherSelectedSquare){
             return '#FFB6C1';
         }
-        return 'white'
+        return null;
       })
     
     var myBackgroundColor = setBackgroundColor(); 
