@@ -8,21 +8,23 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
     var rowNumber = 0;
 
     return (
-        <div>
+        <div style={{display:'flex',justifyContent:'center',flexDirection:'column',textAlign:'center'}}>
             <h1> Board </h1>
-                 {//for each row   
-                    Array.prototype.map.call(data, row => {
-                        rowNumber=rowNumber+1;
-                        return (<Row 
-                                  setSelectedSquare={setSelectedSquare} 
-                                  data={row} key={rowNumber} 
-                                  rowNum={rowNumber}
-                                  selectedSquare={selectedSquare}
-                                  chat={chat}
-                                  otherSelectedSquare={otherSelectedSquare}
-                                />)
-                    })
-                }
+                <div className='Board'>
+                    {//for each row   
+                        Array.prototype.map.call(data, row => {
+                            rowNumber=rowNumber+1;
+                            return (<Row 
+                                    setSelectedSquare={setSelectedSquare} 
+                                    data={row} key={rowNumber} 
+                                    rowNum={rowNumber}
+                                    selectedSquare={selectedSquare}
+                                    chat={chat}
+                                    otherSelectedSquare={otherSelectedSquare}
+                                    />)
+                        })
+                    }
+                </div>
                 {selectedSquare ? buttonArray.map( buttonValue => {
                     return(
                         <Option 

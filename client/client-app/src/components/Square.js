@@ -10,12 +10,9 @@ const Square = ({ rowNum, colNum, value, setSelectedSquare, selectedSquare, chat
     var mySquareId = rowNumber*10 + colNumber;
 
     var setBackgroundColor = (() => {
-        console.log('YOOOOO')
         if(mySquareId === otherSelectedSquare && mySquareId === selectedSquare){
-            console.log("YOOO")
             return '#98FB98';
         }
-
         if(mySquareId === selectedSquare){
             return '#87CEFA';
         }

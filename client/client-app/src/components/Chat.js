@@ -48,7 +48,7 @@ const Chat = ({ location }) => {
     },[])
 
     return (
-        <div>
+        <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
             <h1> Chat </h1>
               <Board 
                 data={currentPuzzle} 

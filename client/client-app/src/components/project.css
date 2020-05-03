@@ -3,13 +3,40 @@
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    height: 20px;
-    width:20px;
+    height: 2px;
+    width:2px;
     display:flex;
     border-style: solid;
     border-width: thin;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .Row{
     display:flex;
+}
+
+.Row div:nth-child(3){
+    border-right: solid;
+}
+
+.Row div:nth-child(6){
+    border-right: solid;
+}
+
+.Row div:nth-child(9){
+    border-right: solid;
+}
+
+.Row div:nth-child(1){
+    border-left: solid;
+}
+
+.Board {
+    display: flex;
+    flex-wrap: wrap;
+    max-width:580px;
+    justify-content: center;
+    text-align: center;
 }
