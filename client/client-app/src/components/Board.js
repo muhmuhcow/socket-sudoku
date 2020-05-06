@@ -10,7 +10,7 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
 
     return (
         <div style={{display:'flex',justifyContent:'center',flexDirection:'column',textAlign:'center'}}>
-            <h1> Board </h1>
+            {/* <h1> Board </h1> */}
                 <div className='Board'>
                     {//for each row   
                         Array.prototype.map.call(data, row => {

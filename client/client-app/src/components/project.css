@@ -93,8 +93,13 @@
 
 .PlayerIcon{
     position: relative;
-    margin-left: 10px;
     top:5px;
+    left:2px;
+    margin-right: 5px;
+    height: 15px;
+    width: 15px;
+    display:flex;
+    justify-items: flex-start;
 } 
 
 .PlayerContainer{
@@ -102,4 +107,5 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    padding-bottom: 40px;
 }
