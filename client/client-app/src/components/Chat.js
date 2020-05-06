@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
 import Board from "./Board";
+import Player from "./Player";
+import './project.css';
 const axios = require('axios').default;
 const queryString = require('query-string');
 const ENDPOINT = 'http://localhost:5000';
 const chat = io.connect(`${ENDPOINT}/puzzle`);
 const connectionSocket = io.connect(`${ENDPOINT}`);
+
 
 const Chat = ({ location }) => {
 
@@ -18,16 +21,13 @@ const Chat = ({ location }) => {
     //catch other player's name
     connectionSocket.on('playerData', response =>{
       if(response.otherPlayer){
-       console.log(response.otherPlayer);
        setPlayerTwo(response.otherPlayer);
       }
     });
 
     //handle name request
     chat.on('myNameRequest', response =>{
-      console.log("YOOOOO");
       if(response==="namePls"){
-        console.log(response);
         connectionSocket.emit('join',{name:`${playerOne}`});
       }
     });
@@ -66,7 +66,6 @@ const Chat = ({ location }) => {
         setPlayerOne(name);
         //send out your name
         connectionSocket.emit('join',({name}));    
-        console.log(name)
         //request other player's name
         chat.emit('nameRequest',({nameRequest:"WOW ok"}), () => {});
     },[])
@@ -74,8 +73,11 @@ const Chat = ({ location }) => {
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
             <h1> Chat </h1>
-            <div className="Players">{playerOne}</div>
-            <div className="Players">{playerTwo}</div>
+            <div className="PlayerContainer"> 
+              <Player title={"Player 1"} playerName={playerOne}/> 
+              <Player title={"Player 2"} playerName={playerTwo}/> 
+            </div>
+            
               <Board 
                 data={currentPuzzle} 
                 setSelectedSquare={setSelectedSquare} 

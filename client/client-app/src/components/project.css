@@ -81,3 +81,25 @@
     margin: 2px;
     font-size: 25px;
 }
+
+.Player{
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.PlayerIcon{
+    position: relative;
+    margin-left: 10px;
+    top:5px;
+} 
+
+.PlayerContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
