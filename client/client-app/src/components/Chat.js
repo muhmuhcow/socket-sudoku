@@ -2,17 +2,37 @@ import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
 import Board from "./Board";
 const axios = require('axios').default;
-// const queryString = require('query-string');
+const queryString = require('query-string');
 const ENDPOINT = 'http://localhost:5000';
 const chat = io.connect(`${ENDPOINT}/puzzle`);
+const connectionSocket = io.connect(`${ENDPOINT}`);
 
 const Chat = ({ location }) => {
-    //initialze name state
-    //const [name,setName] = useState('');
+
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
     const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
+    const [playerOne,setPlayerOne] = useState('');
+    const [playerTwo,setPlayerTwo] = useState('');
 
+    //catch other player's name
+    connectionSocket.on('playerData', response =>{
+      if(response.otherPlayer){
+       console.log(response.otherPlayer);
+       setPlayerTwo(response.otherPlayer);
+      }
+    });
+
+    //handle name request
+    chat.on('myNameRequest', response =>{
+      console.log("YOOOOO");
+      if(response==="namePls"){
+        console.log(response);
+        connectionSocket.emit('join',{name:`${playerOne}`});
+      }
+    });
+
+    //catch board data
     chat.on('myData', response =>{
       if(response.data && 
          !(JSON.stringify(response.data) === JSON.stringify(currentPuzzle))){
@@ -20,6 +40,7 @@ const Chat = ({ location }) => {
       }
     });
 
+    //catch selected square
     chat.on('mySelectedSquare', response =>{
       if(response.squareId){
        setOtherSelectedSquare(response.squareId);
@@ -38,18 +59,23 @@ const Chat = ({ location }) => {
               }); 
             setCurrentPuzzle(response.data[0].data);
         }   
-        getPuzzle();
+        getPuzzle(); 
 
-        // const {name} = queryString.parse(location.search);
-        // var socket = io(ENDPOINT);
-        // setName(name);
-        // socket.emit('join',({name}));
-        
+        //setPlayer1
+        const {name} = queryString.parse(location.search);
+        setPlayerOne(name);
+        //send out your name
+        connectionSocket.emit('join',({name}));    
+        console.log(name)
+        //request other player's name
+        chat.emit('nameRequest',({nameRequest:"WOW ok"}), () => {});
     },[])
 
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
             <h1> Chat </h1>
+            <div className="Players">{playerOne}</div>
+            <div className="Players">{playerTwo}</div>
               <Board 
                 data={currentPuzzle} 
                 setSelectedSquare={setSelectedSquare} 

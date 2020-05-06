@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React,{useState} from 'react';
 import './project.css';
+import Img from 'react-image';
 
 const Option = ({ value, setCurrentPuzzle, selectedSquare, data, chat }) => {
+
+    const [isPressed,setIsPressed] = useState(false);
+    
 
     var handleClick = e => { 
         var newBoardData = data.slice();
@@ -13,10 +17,22 @@ const Option = ({ value, setCurrentPuzzle, selectedSquare, data, chat }) => {
         }); 
     }
 
+    var toggleButtonPress = e => {
+        var newState = !isPressed;
+        setIsPressed(newState);
+    }
+
     return (
-            <button onClick={handleClick}>
-                    {value===0 ? null : value}
-            </button>
+                <div className="Option" onClick={handleClick}
+                    onMouseDown={toggleButtonPress} 
+                    onMouseUp={toggleButtonPress}
+                    onTouchStart={toggleButtonPress} 
+                    onTouchEnd={toggleButtonPress}
+                    style={{backgroundColor:isPressed?"grey":"white"}}
+                >
+                    {value===0 ? <Img src={require('./../assets/icons8-eraser-16.png')}
+                         /> : value}
+                </div>
     );
 }
 export default Option;

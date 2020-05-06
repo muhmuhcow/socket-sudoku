@@ -15,10 +15,9 @@ app.use(router);
 
 io.on('connection', function(socket){
     console.log('a user connected');
-    var newName;
     socket.on('join', ({name})=>{
-      newName=name;
-      socket.broadcast.emit('message',`${newName} is here!`)
+      console.log(name)
+      socket.broadcast.emit('playerData',{otherPlayer:name});
     });
     socket.on('disconnect',()=>{
         console.log('user disconnected')
@@ -35,8 +34,12 @@ io.of('/puzzle')
     });
 
     socket.on('selectedSquare', ({squareId})=>{
-      console.log(`squareId: ${squareId}`);
       socket.broadcast.emit('mySelectedSquare',{squareId:squareId});
+    });
+
+    socket.on('nameRequest', ({nameRequest})=>{
+      console.log(nameRequest);
+      socket.broadcast.emit('myNameRequest',"namePls");
     });
   });
 

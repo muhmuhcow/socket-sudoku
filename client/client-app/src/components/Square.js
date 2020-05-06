@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './project.css';
 
-const Square = ({ rowNum, colNum, value, setSelectedSquare, selectedSquare, chat, otherSelectedSquare }) => {
+const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedSquare, chat, otherSelectedSquare }) => {
 
     const [rowNumber] = useState(rowNum);
     const [colNumber] = useState(colNum);
-    const [isSelected, setIsSelected] = useState(false);
+    const [isImmutable,setIsImmutable] = useState(false);
     
+    //check if number is immutable
+    useEffect(()=>{
+        //console.log(boardData[rowNum-1][colNum-1]);
+        if(boardData[rowNum-1][colNum-1] === value && value!==0){
+            setIsImmutable(true);
+        }
+    },[])
+
     var mySquareId = rowNumber*10 + colNumber;
 
     var setBackgroundColor = (() => {
         if(mySquareId === otherSelectedSquare && mySquareId === selectedSquare){
-            return '#98FB98';
+            return '#FFB6C1';
         }
         if(mySquareId === selectedSquare){
             return '#87CEFA';
         }
-        if(mySquareId === otherSelectedSquare){
-            return '#FFB6C1';
+        if(mySquareId === otherSelectedSquare){ 
+            return '#98FB98';
         }
         return null;
       })
@@ -25,6 +33,9 @@ const Square = ({ rowNum, colNum, value, setSelectedSquare, selectedSquare, chat
     var myBackgroundColor = setBackgroundColor(); 
 
     var handleClick = e => {  
+        if(isImmutable===true){
+            return;
+        }
         setSelectedSquare(mySquareId);
         chat.emit('selectedSquare',({squareId:mySquareId}), () => {      
         }); 
@@ -34,7 +45,7 @@ const Square = ({ rowNum, colNum, value, setSelectedSquare, selectedSquare, chat
             <div 
                 className='Square' 
                 onClick={handleClick}
-                style={{backgroundColor:myBackgroundColor}}
+                style={{backgroundColor:myBackgroundColor,color:isImmutable?"black":"rgb(0, 0, 205)"}}
             >
                     {value===0 ? null : value}
             </div>

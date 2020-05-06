@@ -12,6 +12,8 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    font-size: 40px;
+    border-color: black;
 }
 
 .Row{
@@ -21,15 +23,19 @@
 /* show gridlines */
 .Row div:nth-child(3n){
     border-right: solid;
+    border-color: black;
 }
 .Row div:nth-child(1){
     border-left: solid;
+    border-color: black;
 }
 .Board .Row:nth-child(3n){
     border-bottom: solid;
+    border-color: black;
 }
 .Board .Row:nth-child(1){
     border-top: solid;
+    border-color: black;
 }
 
 /* highlight squares */
@@ -52,4 +58,26 @@
     max-width:580px;
     justify-content: center;
     text-align: center;
+}
+
+.OptionsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20px;
+    padding:10px;
+}
+
+.Option{
+    display:flex;
+    height: 30px;
+    width:30px;
+    border: solid;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: 2px;
+    font-size: 25px;
 }
