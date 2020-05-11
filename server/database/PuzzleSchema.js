@@ -3,11 +3,12 @@ var Schema = mongoose.Schema;
 
  mongoose.connect("mongodb+srv://psmith:eggs1998@cluster0-h5eg7.mongodb.net/test?retryWrites=true&w=majority");
 
- var easyPuzzleSchema = new Schema({
+ var PuzzleSchema = new Schema({
       "data": Array,
-      "date": Date
+      "date": Date,
+      "solution": Array
     });
 
-  var easyPuzzleModel = mongoose.model("easyPuzzleModel",easyPuzzleSchema);
+  var PuzzleModel = mongoose.model("PuzzleModel",PuzzleSchema);
 
-  module.exports = easyPuzzleModel;
+  module.exports = PuzzleModel;
