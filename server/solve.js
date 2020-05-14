@@ -17,6 +17,7 @@ var checkValid = function(puzzle){
                 var k;
                 for (k=0;k<9;k++){
                     if(puzzle[rowNum][colNum]===puzzle[rowNum][k] && colNum!==k){
+                        console.log("aaa");
                         return false;
                     }
                 }
@@ -24,32 +25,33 @@ var checkValid = function(puzzle){
                 var j;
                 for (j=0;j<9;j++){
                     if(puzzle[rowNum][colNum]===puzzle[j][colNum] && rowNum!==j){
+                        console.log("bbb");
                         return false;
                     }
                 }
                 //check if duplicate exists in square group
                 var groupRowStart,groupRowEnd,groupColStart,groupColEnd;
-                if(rowNum<3){
+                if(rowNum===0 || rowNum===1 || rowNum===2){
                     groupRowStart=0;
                     groupRowEnd=2;
                 }
-                if(rowNum<6){
+                if(rowNum===3 || rowNum===4 ||rowNum===5){
                     groupRowStart=3;
                     groupRowEnd=5;
                 }
-                if(rowNum<9){
+                if(rowNum===6 || rowNum===7 || rowNum===8){
                     groupRowStart=6;
                     groupRowEnd=8;
                 }
-                if(colNum<3){
+                if(colNum===0 || colNum===1 || colNum===2){
                     groupColStart=0;
                     groupColEnd=2;
                 }
-                if(colNum<6){
+                if(colNum===3 || colNum===4 ||colNum===5){
                     groupColStart=3;
                     groupColEnd=5;
                 }
-                if(colNum<9){
+                if(colNum===6 || colNum===7 || colNum===8){
                     groupColStart=6;
                     groupColEnd=8;
                 }
@@ -60,6 +62,7 @@ var checkValid = function(puzzle){
                     var m = groupColStart;
                     for(m;m<=groupColEnd;m++){
                         if(puzzle[rowNum][colNum]===puzzle[l][m] && l!==rowNum && m!==colNum){
+                            console.log("ccc");
                             return false;
                         }
                     }

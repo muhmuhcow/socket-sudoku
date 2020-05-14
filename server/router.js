@@ -31,18 +31,16 @@ router.get('/savePuzzle',(req,res) => {
 
 //gets puzzles by api call and saves them in database
 const savePuzzle = async () => {
-  const data = {board:[[0,0,0,0,0,0,8,0,0],[0,0,4,0,0,8,0,0,9],[0,7,0,0,0,0,0,0,5],[0,1,0,0,7,5,0,0,8],[0,5,6,0,9,1,3,0,0],[7,8,0,0,0,0,0,0,0],[0,2,0,0,0,0,0,0,0],[0,0,0,9,3,0,0,1,0],[0,0,5,7,0,0,4,0,3]]}
+  const data = {board:[[2,0,0,0,0,0,8,0,0],[0,2,4,0,0,8,0,0,9],[0,7,0,0,0,0,0,0,5],[0,1,0,0,7,5,0,0,8],[0,5,6,0,9,1,3,0,0],[7,8,0,0,0,0,0,0,0],[0,2,0,0,0,0,0,0,0],[0,0,0,9,3,0,0,1,0],[0,0,5,7,0,0,4,0,3]]}
   const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
       params: {
         difficulty: 'hard'
       }   
   });
-  axios.post('https://sugoku.herokuapp.com/solve', {  
-        body: (data)
-      }   
-  ).then(function (response) {
-        console.log(puzzleResponse.data.board);
-        console.log(response.data.solution);
+        console.log(data.board);
+        var result = checkValid(data.board);
+        console.log(result);
+
       // let now = moment();
       // var newPuzzle = new PuzzleSchema();
       //   newPuzzle.data = puzzleResponse.data.board
@@ -52,10 +50,6 @@ const savePuzzle = async () => {
       //   if(err){console.log(err);}
       //   return data; 
       // }); 
-  })
-.catch(function (error) {
-  console.log(error);
-})  
-};
+}
 
 module.exports = router;
