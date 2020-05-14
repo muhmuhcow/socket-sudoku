@@ -4,6 +4,7 @@ const axios = require('axios');
 const fetch = require('node-fetch');
 var PuzzleSchema = require("./database/PuzzleSchema.js");
 const moment = require('moment');
+var checkValid = require("./solve.js");
 
 router.get('/',(req,res) => {
     res.send("hello world")
