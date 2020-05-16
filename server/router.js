@@ -4,6 +4,7 @@ const axios = require('axios');
 const fetch = require('node-fetch');
 var PuzzleSchema = require("./database/PuzzleSchema.js");
 const moment = require('moment');
+var solve = require("./solve.js");
 var checkValid = require("./solve.js");
 
 router.get('/',(req,res) => {
@@ -31,16 +32,36 @@ router.get('/savePuzzle',(req,res) => {
 
 //gets puzzles by api call and saves them in database
 const savePuzzle = async () => {
-  const data = {board:[[2,0,0,0,0,0,8,0,0],[0,2,4,0,0,8,0,0,9],[0,7,0,0,0,0,0,0,5],[0,1,0,0,7,5,0,0,8],[0,5,6,0,9,1,3,0,0],[7,8,0,0,0,0,0,0,0],[0,2,0,0,0,0,0,0,0],[0,0,0,9,3,0,0,1,0],[0,0,5,7,0,0,4,0,3]]}
-  const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
+  var data = {
+    board: [[1,0,3,0,0,0,0,8,4],
+    [0,0,6,0,4,8,0,0,0],
+    [0,4,0,0,0,0,0,0,0],
+    [2,0,0,0,9,6,1,0,0],
+    [0,9,0,8,0,1,0,4,0],
+    [0,0,4,3,2,0,0,0,8],
+    [0,0,0,0,0,0,0,7,0],
+    [0,0,0,1,5,0,4,0,0],
+    [0,6,0,0,0,0,2,0,3]]
+          };
+     var badData = [ [ 4, 9, 1, 9, 9, 9, 9, 9, 9 ],
+     [ 2, 9, 9, 9, 9, 9, 9, 7, 0 ],
+     [ 0, 7, 0, 0, 0, 0, 0, 0, 0 ],
+     [ 1, 0, 0, 4, 0, 6, 0, 0, 7 ],
+     [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+     [ 0, 0, 0, 0, 1, 2, 5, 4, 6 ],
+     [ 3, 0, 2, 7, 6, 0, 9, 8, 0 ],
+     [ 0, 6, 4, 9, 0, 3, 0, 0, 1 ],
+     [ 9, 8, 0, 5, 2, 1, 0, 6, 0 ] ]  ;   
+    const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
       params: {
         difficulty: 'hard'
       }   
   });
         console.log(data.board);
-        var result = checkValid(data.board);
-        console.log(result);
-
+        var result = solve(data.board);
+        console.log(`result: ${result}`);
+        // var validtest = checkValid(badData);
+        // console.log(`validTest: ${validtest}`)
       // let now = moment();
       // var newPuzzle = new PuzzleSchema();
       //   newPuzzle.data = puzzleResponse.data.board
