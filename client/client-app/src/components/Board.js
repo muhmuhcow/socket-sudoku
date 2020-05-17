@@ -1,9 +1,16 @@
 import React from 'react';
 import Row from "./Row";
 import Option from "./Option";
+import NotesButton from "./NotesButton";
 import './project.css';
 
-const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat, otherSelectedSquare }) => {
+const Board = ({ data, 
+                 setSelectedSquare, 
+                 selectedSquare, 
+                 setCurrentPuzzle, 
+                 chat, 
+                 otherSelectedSquare 
+                }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
     var rowNumber = 0;
@@ -54,6 +61,16 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                     >
                         {0}
                     </Option>
+                    <NotesButton 
+                        key={0} 
+                        value={0}
+                        data={data} 
+                        setCurrentPuzzle={setCurrentPuzzle}
+                        selectedSquare={selectedSquare}
+                        chat={chat}
+                    >
+                        {0}
+                    </NotesButton>
                 </div>
         </div>
     );
