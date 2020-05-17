@@ -46,8 +46,8 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
                 onClick={handleClick}
                 style={{backgroundColor:myBackgroundColor,color:isImmutable?"black":"rgb(0, 0, 205)"}}
             >
-                    {/* {value===0 ? null : value} */}
-                    <div className="NotesContainer">
+                    {value===0 ? null : value}
+                    {/* {<div className="NotesContainer">
                         <div className='Notes'> 1 </div>
                         <div className='Notes'> 2 </div>
                         <div className='Notes'> 3 </div>
@@ -57,7 +57,7 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
                         <div className='Notes'> 7 </div>
                         <div className='Notes'> 8 </div>
                         <div className='Notes'> 9 </div>
-                    </div>
+                    </div>} */}
             </div>
     );
 }

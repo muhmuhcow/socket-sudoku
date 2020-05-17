@@ -5,7 +5,7 @@ import './project.css';
 
 const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat, otherSelectedSquare }) => {
 
-    const buttonArray = [0,1,2,3,4,5,6,7,8,9];
+    const buttonArray = [1,2,3,4,5,6,7,8,9];
     var rowNumber = 0;
 
     return (
@@ -42,6 +42,18 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                             </Option>
                         );
                     }) : null}
+                </div>
+                <div>
+                    <Option 
+                        key={0} 
+                        value={0}
+                        data={data} 
+                        setCurrentPuzzle={setCurrentPuzzle}
+                        selectedSquare={selectedSquare}
+                        chat={chat}
+                    >
+                        {0}
+                    </Option>
                 </div>
         </div>
     );
