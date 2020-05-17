@@ -17,6 +17,8 @@ const Chat = ({ location }) => {
     const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
     const [playerOne,setPlayerOne] = useState('');
     const [playerTwo,setPlayerTwo] = useState('');
+    const [notesMode,setNotesMode] = useState('');
+    const [notes,setNotes] = useState('');
 
     //catch other player's name
     connectionSocket.on('playerData', response =>{
