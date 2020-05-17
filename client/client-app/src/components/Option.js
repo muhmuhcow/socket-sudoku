@@ -8,6 +8,9 @@ const Option = ({ value, setCurrentPuzzle, selectedSquare, data, chat }) => {
     
 
     var handleClick = e => { 
+        if(!selectedSquare){
+            return;
+        }
         var newBoardData = data.slice();
         var colNum = selectedSquare % 10;
         var rowNum = (selectedSquare - colNum) / 10;
@@ -30,7 +33,7 @@ const Option = ({ value, setCurrentPuzzle, selectedSquare, data, chat }) => {
                     onTouchEnd={toggleButtonPress}
                     style={{backgroundColor:isPressed?"grey":"white"}}
                 >
-                    {value===0 ? <Img src={require('./../assets/icons8-eraser-16.png')}
+                    {value===0 ? <Img src={require('./../assets/icons8-eraser-24.png')}
                          /> : value}
                 </div>
     );

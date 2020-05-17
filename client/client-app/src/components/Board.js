@@ -28,7 +28,7 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                     }
                 </div>
                 <div className="OptionsContainer">
-                    {selectedSquare ? buttonArray.map( buttonValue => {
+                    {buttonArray.map( buttonValue => {
                         return(
                             <Option 
                                 key={buttonValue} 
@@ -41,9 +41,9 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                                 {buttonValue}
                             </Option>
                         );
-                    }) : null}
+                    })}
                 </div>
-                <div>
+                <div className="MoreOptions">
                     <Option 
                         key={0} 
                         value={0}
