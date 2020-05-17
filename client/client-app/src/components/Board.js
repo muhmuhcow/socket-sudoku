@@ -17,7 +17,7 @@ const Board = ({ data, setSelectedSquare, selectedSquare, setCurrentPuzzle, chat
                             rowNumber=rowNumber+1;
                             return (<Row 
                                     setSelectedSquare={setSelectedSquare} 
-                                    rowData={row} key={rowNumber} 
+                                     rowData={row} key={rowNumber} 
                                     rowNum={rowNumber}
                                     selectedSquare={selectedSquare}
                                     chat={chat}

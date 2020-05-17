@@ -9,7 +9,6 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
     
     //check if number is immutable
     useEffect(()=>{
-        //console.log(boardData[rowNum-1][colNum-1]);
         if(boardData[rowNum-1][colNum-1] === value && value!==0){
             setIsImmutable(true);
         }
@@ -47,7 +46,18 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
                 onClick={handleClick}
                 style={{backgroundColor:myBackgroundColor,color:isImmutable?"black":"rgb(0, 0, 205)"}}
             >
-                    {value===0 ? null : value}
+                    {/* {value===0 ? null : value} */}
+                    <div className="NotesContainer">
+                        <div className='Notes'> 1 </div>
+                        <div className='Notes'> 2 </div>
+                        <div className='Notes'> 3 </div>
+                        <div className='Notes'> 4 </div>
+                        <div className='Notes'> 5 </div>
+                        <div className='Notes'> 6 </div>
+                        <div className='Notes'> 7 </div>
+                        <div className='Notes'> 8 </div>
+                        <div className='Notes'> 9 </div>
+                    </div>
             </div>
     );
 }
