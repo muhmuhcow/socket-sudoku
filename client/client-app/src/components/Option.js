@@ -6,7 +6,10 @@ const Option = ({ value,
                   setCurrentPuzzle, 
                   selectedSquare, 
                   data, 
-                  chat 
+                  chat,
+                  notesMode,
+                  setNotes,
+                  notes 
                 }) => {
 
     const [isPressed,setIsPressed] = useState(false);
@@ -16,13 +19,26 @@ const Option = ({ value,
         if(!selectedSquare){
             return;
         }
-        var newBoardData = data.slice();
-        var colNum = selectedSquare % 10;
-        var rowNum = (selectedSquare - colNum) / 10;
-        newBoardData[rowNum-1][colNum-1] =  value;
-        setCurrentPuzzle(newBoardData);
-        chat.emit('puzzle',({data:newBoardData}), () => {      
-        }); 
+        if(notesMode){
+            const notesId = selectedSquare-(((selectedSquare-(selectedSquare%10))/10)+9)-1;
+            var newNotes = notes.slice();
+            if(notes[notesId].find(notesValue => {return notesValue===value})){
+                newNotes[notesId] = newNotes[notesId].filter(noteValue => noteValue !== value);
+            }
+            else{
+                newNotes[notesId].push(value);
+            } 
+            setNotes(newNotes);
+        }
+        else{
+            var newBoardData = data.slice();
+            var colNum = selectedSquare % 10;
+            var rowNum = (selectedSquare - colNum) / 10;
+            newBoardData[rowNum-1][colNum-1] =  value;
+            setCurrentPuzzle(newBoardData);
+            chat.emit('puzzle',({data:newBoardData}), () => {      
+            }); 
+        }
     }
 
     var toggleButtonPress = e => {

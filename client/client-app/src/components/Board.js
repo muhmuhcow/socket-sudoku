@@ -51,6 +51,7 @@ const Board = ({ data,
                                 chat={chat}
                                 notesMode={notesMode}
                                 setNotes={setNotes}
+                                notes={notes}
                             >
                                 {buttonValue}
                             </Option>
