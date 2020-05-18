@@ -2,18 +2,16 @@ import React,{useState} from 'react';
 import './project.css';
 import Img from 'react-image';
 
-const NotesButton = ({ value, 
-                  setCurrentPuzzle, 
-                  selectedSquare, 
-                  data, 
-                  chat 
+const NotesButton = ({ notesMode,
+                       setNotesMode
+                  
                 }) => {
 
     const [isPressed,setIsPressed] = useState(false);
     
 
     var handleClick = e => { 
-        //setIsPressed(true);
+        setNotesMode(!notesMode);
 
     }
 
@@ -32,8 +30,7 @@ const NotesButton = ({ value,
                     //onTouchEnd={toggleButtonPress}
                     style={{backgroundColor:isPressed?"grey":"white"}}
                 >
-                    {value===0 ? <Img src={require('./../assets/icons8-pencil-24.png')}
-                         /> : value}
+                    <Img src={require('./../assets/icons8-pencil-24.png')}/>
                 </div>
     );
 }

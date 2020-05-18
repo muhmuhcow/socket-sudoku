@@ -120,6 +120,7 @@
 .Notes{
     font-size: 11px;
     border: none !important;
+    color: grey;
 }
 
 .NotesContainer{

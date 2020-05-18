@@ -9,7 +9,11 @@ const Board = ({ data,
                  selectedSquare, 
                  setCurrentPuzzle, 
                  chat, 
-                 otherSelectedSquare 
+                 otherSelectedSquare,
+                 setNotesMode,
+                 setNotes,
+                 notesMode,
+                 notes 
                 }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
@@ -24,12 +28,13 @@ const Board = ({ data,
                             rowNumber=rowNumber+1;
                             return (<Row 
                                     setSelectedSquare={setSelectedSquare} 
-                                     rowData={row} key={rowNumber} 
+                                    rowData={row} key={rowNumber} 
                                     rowNum={rowNumber}
                                     selectedSquare={selectedSquare}
                                     chat={chat}
                                     otherSelectedSquare={otherSelectedSquare}
                                     boardData={data}
+                                    notes={notes}
                                     />)
                         })
                     }
@@ -44,6 +49,8 @@ const Board = ({ data,
                                 setCurrentPuzzle={setCurrentPuzzle}
                                 selectedSquare={selectedSquare}
                                 chat={chat}
+                                notesMode={notesMode}
+                                setNotes={setNotes}
                             >
                                 {buttonValue}
                             </Option>
@@ -58,16 +65,15 @@ const Board = ({ data,
                         setCurrentPuzzle={setCurrentPuzzle}
                         selectedSquare={selectedSquare}
                         chat={chat}
+                        notesMode={notesMode}
+                        setNotes={setNotes}
                     >
                         {0}
                     </Option>
                     <NotesButton 
-                        key={0} 
-                        value={0}
-                        data={data} 
-                        setCurrentPuzzle={setCurrentPuzzle}
-                        selectedSquare={selectedSquare}
-                        chat={chat}
+                        key={99} 
+                        setNotesMode={setNotesMode}
+                        notesMode={notesMode}
                     >
                         {0}
                     </NotesButton>

@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './project.css';
 
-const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedSquare, chat, otherSelectedSquare }) => {
+const Square = ({ boardData,
+                  rowNum, 
+                  colNum, 
+                  value, 
+                  setSelectedSquare, 
+                  selectedSquare, 
+                  chat, 
+                  otherSelectedSquare, 
+                  notes }) => {
 
     const [rowNumber] = useState(rowNum);
     const [colNumber] = useState(colNum);
     const [isImmutable,setIsImmutable] = useState(false);
-    
+    var mySquareId = rowNumber*10 + colNumber;
+    const notesId = mySquareId-(((mySquareId-(mySquareId%10))/10)+9)-1;
+    var notesArray = [1,2,3,4,5,6,7,8,9];
     //check if number is immutable
     useEffect(()=>{
         if(boardData[rowNum-1][colNum-1] === value && value!==0){
@@ -14,7 +24,7 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
         }
     },[])
 
-    var mySquareId = rowNumber*10 + colNumber;
+    
 
     var setBackgroundColor = (() => {
         if(mySquareId === otherSelectedSquare && mySquareId === selectedSquare){
@@ -37,7 +47,8 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
         }
         setSelectedSquare(mySquareId);
         chat.emit('selectedSquare',({squareId:mySquareId}), () => {      
-        }); 
+        });
+        console.log(`${mySquareId} : ${notesId}`)
     }
 
     return (
@@ -46,9 +57,17 @@ const Square = ({ boardData, rowNum, colNum, value, setSelectedSquare, selectedS
                 onClick={handleClick}
                 style={{backgroundColor:myBackgroundColor,color:isImmutable?"black":"rgb(0, 0, 205)"}}
             >
-                    {value===0 ? null : value}
+                    {/* {value===0 ? null : value} */}
+                    
+                    {value===0 ?
+                    <div className="NotesContainer">
+                        {Array.prototype.map.call(notesArray, value => {
+                            return (<div className="Notes" key={value}> 
+                                        {notes[notesId].find(notesValue => {return notesValue===value})?value:null} </div>)
+                        })}
+                    </div>:value}
                     {/* {<div className="NotesContainer">
-                        <div className='Notes'> 1 </div>
+                        {<div className='Notes'> 1 </div>}
                         <div className='Notes'> 2 </div>
                         <div className='Notes'> 3 </div>
                         <div className='Notes'> 4 </div>

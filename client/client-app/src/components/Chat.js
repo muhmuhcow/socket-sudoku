@@ -49,9 +49,8 @@ const Chat = ({ location }) => {
       }
     });
 
-    //called for change on ENDPOINT or url params
+    //called on component mount
     useEffect (() => {
-
         //get data from server and store to the state
         var getPuzzle = async () => {
             const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
@@ -62,7 +61,21 @@ const Chat = ({ location }) => {
             setCurrentPuzzle(response.data[0].data);
         }   
         getPuzzle(); 
-
+        //initialise notes array
+        var myNotes = [];
+        for (var i=0;i<81;i++){
+          myNotes.push([0]);
+        }
+        myNotes[0].push(1);
+        myNotes[0].push(2);
+        myNotes[0].push(3);
+        myNotes[0].push(4);
+        myNotes[0].push(5);
+        myNotes[0].push(6);
+        myNotes[0].push(7);
+        myNotes[0].push(8);
+        myNotes[0].push(9);
+        setNotes(myNotes);
         //setPlayer1
         const {name} = queryString.parse(location.search);
         setPlayerOne(name);
@@ -74,7 +87,7 @@ const Chat = ({ location }) => {
 
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-            <h1> Chat </h1>
+            <h1> {notesMode?'NOTES MODE ON':'NOTES MODE OFF'} </h1>
             <div className="PlayerContainer"> 
               <Player title={"Player 1"} playerName={playerOne}/> 
               <Player title={"Player 2"} playerName={playerTwo}/> 
@@ -87,6 +100,10 @@ const Chat = ({ location }) => {
                 setCurrentPuzzle={setCurrentPuzzle}
                 chat={chat}
                 otherSelectedSquare={otherSelectedSquare}
+                setNotesMode={setNotesMode}
+                setNotes={setNotes}
+                notesMode={notesMode}
+                notes={notes}
              />
         </div>
     );
