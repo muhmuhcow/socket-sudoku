@@ -16,7 +16,7 @@ const Option = ({ value,
     
 
     var handleClick = e => { 
-        if(!selectedSquare){
+        if(!selectedSquare || (value===0&&notesMode===true)){
             return;
         }
         if(notesMode){
