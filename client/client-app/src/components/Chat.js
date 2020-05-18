@@ -66,15 +66,6 @@ const Chat = ({ location }) => {
         for (var i=0;i<81;i++){
           myNotes.push([0]);
         }
-        myNotes[0].push(1);
-        myNotes[0].push(2);
-        myNotes[0].push(3);
-        myNotes[0].push(4);
-        myNotes[0].push(5);
-        myNotes[0].push(6);
-        myNotes[0].push(7);
-        myNotes[0].push(8);
-        myNotes[0].push(9);
         setNotes(myNotes);
         //setPlayer1
         const {name} = queryString.parse(location.search);
