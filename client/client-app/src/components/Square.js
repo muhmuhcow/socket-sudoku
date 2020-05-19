@@ -45,10 +45,10 @@ const Square = ({ boardData,
         if(isImmutable===true){
             return;
         }
+        console.log(`${mySquareId} : ${notesId}`)
         setSelectedSquare(mySquareId);
         chat.emit('selectedSquare',({squareId:mySquareId}), () => {      
         });
-        console.log(`${mySquareId} : ${notesId}`)
     }
 
     return (

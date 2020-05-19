@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from "socket.io-client";
 import Board from "./Board";
 import Player from "./Player";
+import checkValid from "./checkValid";
 import './project.css';
 const axios = require('axios').default;
 const queryString = require('query-string');
@@ -19,6 +20,7 @@ const Chat = ({ location }) => {
     const [playerTwo,setPlayerTwo] = useState('');
     const [notesMode,setNotesMode] = useState('');
     const [notes,setNotes] = useState('');
+    const [errorStack,setErrorStack] = useState([]);
 
     //catch other player's name
     connectionSocket.on('playerData', response =>{
@@ -75,6 +77,14 @@ const Chat = ({ location }) => {
         //request other player's name
         chat.emit('nameRequest',({nameRequest:"WOW ok"}), () => {});
     },[])
+
+    //check for puzzle error and update error stack
+    useEffect (() => {
+      if(currentPuzzle){
+        var myErrorStack = checkValid(currentPuzzle);
+        setErrorStack(myErrorStack);
+      }
+  },[currentPuzzle])
 
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
