@@ -13,7 +13,8 @@ const Board = ({ data,
                  setNotesMode,
                  setNotes,
                  notesMode,
-                 notes 
+                 notes,
+                 errorStack 
                 }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
@@ -35,6 +36,7 @@ const Board = ({ data,
                                     otherSelectedSquare={otherSelectedSquare}
                                     boardData={data}
                                     notes={notes}
+                                    errorStack={errorStack}
                                     />)
                         })
                     }

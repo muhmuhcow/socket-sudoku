@@ -105,6 +105,7 @@ const Chat = ({ location }) => {
                 setNotes={setNotes}
                 notesMode={notesMode}
                 notes={notes}
+                errorStack={errorStack}
              />
         </div>
     );

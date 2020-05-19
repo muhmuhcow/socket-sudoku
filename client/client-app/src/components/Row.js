@@ -8,7 +8,9 @@ const Row = ({ rowData,
                chat, 
                otherSelectedSquare, 
                boardData,
-               notes }) => {
+               notes,
+               errorStack
+             }) => {
 
     var columnNumber=0;
     return (
@@ -28,6 +30,7 @@ const Row = ({ rowData,
                                     otherSelectedSquare={otherSelectedSquare}
                                     boardData={boardData}
                                     notes={notes}
+                                    errorStack={errorStack}
                                 />; 
                     })
                 }

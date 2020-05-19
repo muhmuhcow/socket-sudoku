@@ -9,7 +9,8 @@ const Square = ({ boardData,
                   selectedSquare, 
                   chat, 
                   otherSelectedSquare, 
-                  notes }) => {
+                  notes,
+                  errorStack }) => {
 
     const [rowNumber] = useState(rowNum);
     const [colNumber] = useState(colNum);
@@ -55,7 +56,9 @@ const Square = ({ boardData,
             <div 
                 className='Square' 
                 onClick={handleClick}
-                style={{backgroundColor:myBackgroundColor,color:isImmutable?"black":"rgb(0, 0, 205)"}}
+                style={{backgroundColor:myBackgroundColor,
+                    color:isImmutable?"black"
+                    :(errorStack.find(errorId => {return errorId===mySquareId})? "red" : "rgb(0, 0, 205)")}}
             >
                     {/* {value===0 ? null : value} */}
                     
