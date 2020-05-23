@@ -25,8 +25,6 @@ const Square = ({ boardData,
         }
     },[])
 
-    
-
     var setBackgroundColor = (() => {
         if(mySquareId === otherSelectedSquare && mySquareId === selectedSquare){
             return '#FFB6C1';
@@ -46,7 +44,6 @@ const Square = ({ boardData,
         if(isImmutable===true){
             return;
         }
-        console.log(`${mySquareId} : ${notesId}`)
         setSelectedSquare(mySquareId);
         chat.emit('selectedSquare',({squareId:mySquareId}), () => {      
         });
@@ -57,11 +54,10 @@ const Square = ({ boardData,
                 className='Square' 
                 onClick={handleClick}
                 style={{backgroundColor:myBackgroundColor,
-                    color:isImmutable?"black"
-                    :(errorStack.find(errorId => {return errorId===mySquareId})? "red" : "rgb(0, 0, 205)")}}
-            >
-                    {/* {value===0 ? null : value} */}
-                    
+                        color:isImmutable?"black"
+                        :(errorStack.find(errorId => {return errorId===mySquareId})? "red" : "rgb(0, 0, 205)")
+                      }}
+            >               
                     {value===0 ?
                     <div className="NotesContainer">
                         {Array.prototype.map.call(notesArray, value => {
@@ -69,17 +65,6 @@ const Square = ({ boardData,
                                         {notes[notesId].find(notesValue => {return notesValue===value})?value:null} </div>)
                         })}
                     </div>:value}
-                    {/* {<div className="NotesContainer">
-                        {<div className='Notes'> 1 </div>}
-                        <div className='Notes'> 2 </div>
-                        <div className='Notes'> 3 </div>
-                        <div className='Notes'> 4 </div>
-                        <div className='Notes'> 5 </div>
-                        <div className='Notes'> 6 </div>
-                        <div className='Notes'> 7 </div>
-                        <div className='Notes'> 8 </div>
-                        <div className='Notes'> 9 </div>
-                    </div>} */}
             </div>
     );
 }
