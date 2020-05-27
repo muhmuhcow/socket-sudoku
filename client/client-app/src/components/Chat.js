@@ -16,6 +16,8 @@ const connectionSocket = io.connect(`${ENDPOINT}`);
 
 const Chat = ({ location }) => {
 
+    //const [initialPuzzle,setInitialPuzzle] = useState('');
+    var initialPuzzle;
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
     const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
@@ -26,6 +28,7 @@ const Chat = ({ location }) => {
     const [errorStack,setErrorStack] = useState([]);
     const [winState,setWinState] = useState(false);
     var timerStop;
+    var timerReset;
     const myData = [ [ 0, 2, 3, 4, 5, 6, 7, 8, 9 ],
     [ 4, 5, 6, 7, 8, 9, 1, 2, 3 ],
     [ 7, 8, 9, 1, 2, 3, 4, 5, 6 ],
@@ -76,6 +79,8 @@ const Chat = ({ location }) => {
               }); 
             setCurrentPuzzle(response.data[0].data);
             setCurrentPuzzle(myData);
+            initialPuzzle = response.data[0].data;
+            console.log(initialPuzzle);
         }   
         getPuzzle(); 
        
@@ -128,11 +133,12 @@ const Chat = ({ location }) => {
             </div>
             
             <div style={{color:'green'}}>
-              {/* <Timer initialTime={5000} lastUnit="minutes"> */}
+              
               <Timer initialTime={0} lastUnit="m" >
                 {
                   ({ start, resume, pause, stop, reset }) => {
                     timerStop = stop;
+                    timerReset = reset;
                     return(
                       <React.Fragment>
                       <Timer.Minutes />m  
@@ -145,6 +151,7 @@ const Chat = ({ location }) => {
               {winState===true ? 
               <Img src={require('./../assets/icons8-tick-box-48.png')}/>
               : null}
+              <Img onClick={()=>{console.log(initialPuzzle);setCurrentPuzzle(initialPuzzle);timerReset();}} src={require('./../assets/icons8-reset-64.png')}/>
             </div>
 
               <Board 

@@ -3,25 +3,19 @@ import './project.css';
 import Img from 'react-image';
 
 const NotesButton = ({ notesMode,
-                       setNotesMode
-                  
+                       setNotesMode      
                 }) => {
-
     const [isPressed,setIsPressed] = useState(false);
-    
-
     var handleClick = e => { 
         setNotesMode(!notesMode);
 
     }
-
     var toggleButtonPress = e => {
         if (e.type === "mousedown" || e.type==="touchstart") {
         var newState = !isPressed;
         setIsPressed(newState);
         }
     }
-
     return (
                 <div className="Option" onClick={handleClick}
                     onMouseDown={toggleButtonPress} 
