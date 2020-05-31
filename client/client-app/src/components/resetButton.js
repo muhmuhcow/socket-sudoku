@@ -16,8 +16,8 @@ const ResetButton = ({
                   difficulty: 'easy'
                 }
               }); 
-            setCurrentPuzzle(response.data[0].data);
-            chat.emit('puzzle',({data:response.data[0].data}), () => {      
+            setCurrentPuzzle(response.data[0].initialPuzzle);
+            chat.emit('puzzle',({data:response.data[0].initialPuzzle}), () => {      
             });
         }   
         getPuzzle(); 

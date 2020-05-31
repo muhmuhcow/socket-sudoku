@@ -35,29 +35,15 @@ const savePuzzle = async () => {
         difficulty: 'hard'
       }   
   });
-
-  axios.post('https://sugoku.herokuapp.com/solve', {  
-    body: (puzzleResponse.data.board)
-  }   
-).then(function (response) {
-    console.log(puzzleResponse.data.board);
-    console.log(response.data.solution);
-
-
-})
-.catch(function (error) {
-console.log(error);
-})  
-
       let now = moment();
       var newPuzzle = new PuzzleSchema();
-        newPuzzle.data = puzzleResponse.data.board
+        newPuzzle.currentPuzzle = puzzleResponse.data.board
         newPuzzle.date = now.format();
-        newPuzzle.solution = response.data.solution;
-      newPuzzle.save(function(err,data){
-        if(err){console.log(err);}
-        return data; 
-      }); 
+        newPuzzle.initialPuzzle = puzzleResponse.data.board;
+        newPuzzle.save(function(err,data){
+          if(err){console.log(err);}
+          return data; 
+        }); 
 }
 
 module.exports = router;

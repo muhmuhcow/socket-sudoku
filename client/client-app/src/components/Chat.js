@@ -76,7 +76,7 @@ const Chat = ({ location }) => {
                   difficulty: 'easy'
                 }
               }); 
-            setCurrentPuzzle(response.data[0].data);
+            setCurrentPuzzle(response.data[0].currentPuzzle);
         }   
         getPuzzle(); 
        
