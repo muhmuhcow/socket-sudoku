@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import Board from "./Board";
 import Player from "./Player";
 import checkValid from "./checkValid";
+import ResetButton from "./ResetButton";
 import Img from 'react-image';
 import Timer from 'react-compound-timer'
 import './project.css';
@@ -16,8 +17,6 @@ const connectionSocket = io.connect(`${ENDPOINT}`);
 
 const Chat = ({ location }) => {
 
-    //const [initialPuzzle,setInitialPuzzle] = useState('');
-    var initialPuzzle;
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
     const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
@@ -78,9 +77,6 @@ const Chat = ({ location }) => {
                 }
               }); 
             setCurrentPuzzle(response.data[0].data);
-            setCurrentPuzzle(myData);
-            initialPuzzle = response.data[0].data;
-            console.log(initialPuzzle);
         }   
         getPuzzle(); 
        
@@ -151,7 +147,7 @@ const Chat = ({ location }) => {
               {winState===true ? 
               <Img src={require('./../assets/icons8-tick-box-48.png')}/>
               : null}
-              <Img onClick={()=>{console.log(initialPuzzle);setCurrentPuzzle(initialPuzzle);timerReset();}} src={require('./../assets/icons8-reset-64.png')}/>
+              <ResetButton chat={chat} setCurrentPuzzle={setCurrentPuzzle} />
             </div>
 
               <Board 
