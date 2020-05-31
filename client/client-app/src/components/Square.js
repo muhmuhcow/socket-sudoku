@@ -10,7 +10,9 @@ const Square = ({ boardData,
                   chat, 
                   otherSelectedSquare, 
                   notes,
-                  errorStack }) => {
+                  errorStack,
+                  initialPuzzle
+                 }) => {
 
     const [rowNumber] = useState(rowNum);
     const [colNumber] = useState(colNum);
@@ -20,7 +22,7 @@ const Square = ({ boardData,
     var notesArray = [1,2,3,4,5,6,7,8,9];
     //check if number is immutable
     useEffect(()=>{
-        if(boardData[rowNum-1][colNum-1] === value && value!==0){
+        if( value===initialPuzzle[rowNum-1][colNum-1] && value!==0){
             setIsImmutable(true);
         }
     },[])

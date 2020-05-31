@@ -17,6 +17,7 @@ const connectionSocket = io.connect(`${ENDPOINT}`);
 
 const Chat = ({ location }) => {
 
+    const [initialPuzzle,setInitialPuzzle] = useState('');
     const [currentPuzzle,setCurrentPuzzle] = useState('');
     const [selectedSquare,setSelectedSquare] = useState('');
     const [otherSelectedSquare, setOtherSelectedSquare] = useState('');
@@ -75,8 +76,10 @@ const Chat = ({ location }) => {
                 params: {
                   difficulty: 'easy'
                 }
-              }); 
+              });
+            setInitialPuzzle(response.data[0].initialPuzzle); 
             setCurrentPuzzle(response.data[0].currentPuzzle);
+            
         }   
         getPuzzle(); 
        
@@ -98,6 +101,7 @@ const Chat = ({ location }) => {
     //check for puzzle error and update error stack
     useEffect (() => {
       if(currentPuzzle){
+        console.log(initialPuzzle)
         var myErrorStack = checkValid(currentPuzzle);
         setErrorStack(myErrorStack);
         //for every row in puzzle
@@ -162,6 +166,7 @@ const Chat = ({ location }) => {
                 notesMode={notesMode}
                 notes={notes}
                 errorStack={errorStack}
+                initialPuzzle={initialPuzzle}
              />
         </div>
     );

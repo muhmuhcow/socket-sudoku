@@ -14,12 +14,13 @@ const Board = ({ data,
                  setNotes,
                  notesMode,
                  notes,
-                 errorStack 
+                 errorStack,
+                 initialPuzzle 
                 }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
     var rowNumber = 0;
-
+    console.log(initialPuzzle);                 
     return (
         <div style={{display:'flex',justifyContent:'center',flexDirection:'column',textAlign:'center'}}>
             {/* <h1> Board </h1> */}
@@ -37,6 +38,7 @@ const Board = ({ data,
                                     boardData={data}
                                     notes={notes}
                                     errorStack={errorStack}
+                                    initialPuzzle={initialPuzzle}
                                     />)
                         })
                     }

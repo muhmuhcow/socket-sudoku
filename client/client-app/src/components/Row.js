@@ -9,7 +9,8 @@ const Row = ({ rowData,
                otherSelectedSquare, 
                boardData,
                notes,
-               errorStack
+               errorStack,
+               initialPuzzle
              }) => {
 
     var columnNumber=0;
@@ -31,6 +32,7 @@ const Row = ({ rowData,
                                     boardData={boardData}
                                     notes={notes}
                                     errorStack={errorStack}
+                                    initialPuzzle={initialPuzzle}
                                 />; 
                     })
                 }

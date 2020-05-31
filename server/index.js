@@ -46,10 +46,8 @@ io.of('/puzzle')
       socket.broadcast.emit('myNameRequest',"namePls");
     });
     socket.on('disconnect',()=>{
-      console.log(lastSavedPuzzle);
       console.log('user disconnected')
       //modify database entry to most recently saved puzzle
-      //var myPuzzle = new PuzzleSchema();
       PuzzleSchema.updateOne({'_id':myObjectID},{ $set: {currentPuzzle: lastSavedPuzzle} },
         function(err){
           if (err) throw err;
