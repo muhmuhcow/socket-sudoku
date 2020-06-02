@@ -4,13 +4,13 @@ const axios = require('axios');
 const fetch = require('node-fetch');
 var PuzzleSchema = require("./database/PuzzleSchema.js");
 const moment = require('moment');
+var bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: false }))
+//router.use(bodyParser.json({ type: 'application/*+json' }))
+router.use(bodyParser.json())
 
 router.get('/',(req,res) => {
     res.send("hello world")
-})
-
-router.get('/getStuff',(req,res) => {
-    res.json({ text: 'yoyo wuddup' })
 })
 
 //get puzzle from database
@@ -19,6 +19,12 @@ router.get('/getPuzzle',(req,res) => {
   PuzzleSchema.find({}).sort(mySort).exec(function(err, docs) { 
       res.send(docs)
   });
+})
+
+//change puzzle in the database
+router.post('/changePuzzle',(req,res) => {
+  console.log(req.body.difficulty);
+  res.send(req.body);
 })
 
 //get puzzle from database

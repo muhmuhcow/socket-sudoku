@@ -48,11 +48,13 @@ io.of('/puzzle')
     socket.on('disconnect',()=>{
       console.log('user disconnected')
       //modify database entry to most recently saved puzzle
-      PuzzleSchema.updateOne({'_id':myObjectID},{ $set: {currentPuzzle: lastSavedPuzzle} },
+      if(lastSavedPuzzle){
+        PuzzleSchema.updateOne({'_id':myObjectID},{ $set: {currentPuzzle: lastSavedPuzzle} },
         function(err){
           if (err) throw err;
           console.log("1 document updated");
         })
+      }
       });
   });
 

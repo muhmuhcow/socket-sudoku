@@ -4,6 +4,7 @@ import Board from "./Board";
 import Player from "./Player";
 import checkValid from "./checkValid";
 import ResetButton from "./ResetButton";
+import DifficultyForm from "./DifficultyForm";
 import Img from 'react-image';
 import Timer from 'react-compound-timer'
 import './project.css';
@@ -126,14 +127,16 @@ const Chat = ({ location }) => {
 
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-            <h1> {notesMode?'NOTES MODE ON':'NOTES MODE OFF'} </h1>
+            <div>
+              <DifficultyForm/>
+            </div>
+            
             <div className="PlayerContainer"> 
               <Player title={"Player 1"} playerName={playerOne}/> 
               <Player title={"Player 2"} playerName={playerTwo}/> 
             </div>
-            
+
             <div style={{color:'green'}}>
-              
               <Timer initialTime={0} lastUnit="m" >
                 {
                   ({ start, resume, pause, stop, reset }) => {
