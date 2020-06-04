@@ -1,12 +1,12 @@
 import React,{useState} from 'react';
 import './project.css';
-import Img from 'react-image';
 
 const axios = require('axios').default;
-const qs = require('querystring');
-const ENDPOINT = 'http://localhost:5000';
 
-const DifficultyForm = ({       
+const DifficultyForm = ({    
+                    setCurrentPuzzle,
+                    setInitialPuzzle,
+                    chat   
                 }) => {
     
     const [difficulty,setDifficulty] = useState('');                
@@ -18,40 +18,50 @@ const DifficultyForm = ({
     var handleSubmit = (e) => {
         e.preventDefault();
         var getPuzzle = async () => {
-        //     // const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
-        //     //     params: {
-        //     //       difficulty: {difficulty}
-        //     //     }
-        //     //   });
-        var actualDifficulty = difficulty;
-        var payload = {difficulty:actualDifficulty};
-        console.log(payload);
-            const response = await axios.post(`${ENDPOINT}/changePuzzle`,
-                    payload
-                ,{
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-        //     //setInitialPuzzle(response.data[0].initialPuzzle); 
-        //     //setCurrentPuzzle(response.data[0].currentPuzzle);
             
+              var actualDifficulty = difficulty;
+              const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
+                    params: {
+                    difficulty: actualDifficulty
+                    }   
+                });
+            setInitialPuzzle(puzzleResponse.data.board); 
+            setCurrentPuzzle(puzzleResponse.data.board);
+            chat.emit('puzzle',({data:puzzleResponse.data.board}), () => {      
+            });
+            chat.emit('resetInitial',({data:puzzleResponse.data.board}), () => {      
+            });
         }   
         getPuzzle(); 
-        console.log(difficulty)
-        // fetch(`${ENDPOINT}/changePuzzle`, {
-        //     method: 'post',
-        //     body: difficulty
-        // }).then(function(response) {
-        //     console.log(response.data);
-        // });
-
+        // var changePuzzle = async () => {
+        // var actualDifficulty = difficulty ? difficulty : 'easy';
+        // var payload = {difficulty:actualDifficulty};
+        // console.log(payload);
+        //     const response = await axios.post(`${ENDPOINT}/changePuzzle`,
+        //             payload
+        //         ,{
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             }
+        //       })
+        //       .then(function (response) {
+        //         var getPuzzle = async () => {
+        //             const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
+        //                 params: {
+        //                   difficulty: 'easy'
+        //                 }
+        //               });
+        //             setInitialPuzzle(response.data[0].initialPuzzle); 
+        //             setCurrentPuzzle(response.data[0].currentPuzzle);
+        //         }   
+        //         getPuzzle(); 
+        //       })
+        //       .catch(function (error) {
+        //         console.log(error);
+        //       });
+            
+        // }   
+        // changePuzzle(); 
       }
    
     return (

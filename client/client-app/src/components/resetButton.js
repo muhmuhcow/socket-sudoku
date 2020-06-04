@@ -1,26 +1,18 @@
 import React from 'react';
 import './project.css';
 import Img from 'react-image';
-const axios = require('axios').default;
-const ENDPOINT = 'http://localhost:5000';
 
 const ResetButton = ({  
                     setCurrentPuzzle,
-                    chat     
+                    chat,
+                    initialPuzzle     
                 }) => {
 
     var handleClick = e => { 
-        var getPuzzle = async () => {
-            const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
-                params: {
-                  difficulty: 'easy'
-                }
-              }); 
-            setCurrentPuzzle(response.data[0].initialPuzzle);
-            chat.emit('puzzle',({data:response.data[0].initialPuzzle}), () => {      
-            });
-        }   
-        getPuzzle(); 
+        var actualInitialPuzzle = initialPuzzle;
+        setCurrentPuzzle(actualInitialPuzzle);
+        chat.emit('puzzle',({data:actualInitialPuzzle}), () => {      
+        });
 
     }
     return (

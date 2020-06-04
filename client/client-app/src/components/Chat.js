@@ -72,6 +72,7 @@ const Chat = ({ location }) => {
     //called on component mount
     useEffect (() => {
         //get data from server and store to the state
+        console.log("HIIII")
         var getPuzzle = async () => {
             const response = await axios.get(`${ENDPOINT}/getPuzzle`, {
                 params: {
@@ -80,7 +81,7 @@ const Chat = ({ location }) => {
               });
             setInitialPuzzle(response.data[0].initialPuzzle); 
             setCurrentPuzzle(response.data[0].currentPuzzle);
-            
+            console.log(response)
         }   
         getPuzzle(); 
        
@@ -102,7 +103,8 @@ const Chat = ({ location }) => {
     //check for puzzle error and update error stack
     useEffect (() => {
       if(currentPuzzle){
-        console.log(initialPuzzle)
+        console.log(`current: ${currentPuzzle[0]}`)
+        console.log(`initial: ${initialPuzzle[0]}`)
         var myErrorStack = checkValid(currentPuzzle);
         setErrorStack(myErrorStack);
         //for every row in puzzle
@@ -128,7 +130,11 @@ const Chat = ({ location }) => {
     return (
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
             <div>
-              <DifficultyForm/>
+              <DifficultyForm 
+                setCurrentPuzzle={setCurrentPuzzle}
+                setInitialPuzzle={setInitialPuzzle}
+                chat={chat}
+              />
             </div>
             
             <div className="PlayerContainer"> 
@@ -154,7 +160,7 @@ const Chat = ({ location }) => {
               {winState===true ? 
               <Img src={require('./../assets/icons8-tick-box-48.png')}/>
               : null}
-              <ResetButton chat={chat} setCurrentPuzzle={setCurrentPuzzle} />
+              <ResetButton chat={chat} setCurrentPuzzle={setCurrentPuzzle} initialPuzzle={initialPuzzle} />
             </div>
 
               <Board 

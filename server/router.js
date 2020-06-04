@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const fetch = require('node-fetch');
+const path = require('path'); 
 var PuzzleSchema = require("./database/PuzzleSchema.js");
 const moment = require('moment');
 var bodyParser = require('body-parser');
@@ -9,9 +10,16 @@ router.use(bodyParser.urlencoded({ extended: false }))
 //router.use(bodyParser.json({ type: 'application/*+json' }))
 router.use(bodyParser.json())
 
-router.get('/',(req,res) => {
-    res.send("hello world")
-})
+router.use(express.static(path.join(__dirname, 'build')));
+
+
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+// router.get('/',(req,res) => {
+//     res.send("hello world")
+// })
 
 //get puzzle from database
 router.get('/getPuzzle',(req,res) => {
@@ -24,6 +32,8 @@ router.get('/getPuzzle',(req,res) => {
 //change puzzle in the database
 router.post('/changePuzzle',(req,res) => {
   console.log(req.body.difficulty);
+  //make api request
+  changePuzzle(difficulty);
   res.send(req.body);
 })
 
@@ -35,10 +45,13 @@ router.get('/savePuzzle',(req,res) => {
 })
 
 //gets puzzles by api call and saves them in database
-const savePuzzle = async () => {
+const savePuzzle = async difficulty => {
+    if(!difficulty){
+      difficulty = 'easy'
+    }
     const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
       params: {
-        difficulty: 'hard'
+        difficulty: difficulty
       }   
   });
       let now = moment();
@@ -50,6 +63,33 @@ const savePuzzle = async () => {
           if(err){console.log(err);}
           return data; 
         }); 
+}
+
+//gets puzzles by api call and saves them in database
+const changePuzzle = async difficulty => {
+  if(!difficulty){
+    difficulty = 'easy'
+  }
+  const puzzleResponse = await axios.get('https://sugoku.herokuapp.com/board', {
+    params: {
+      difficulty: difficulty
+    }   
+});
+  //update existing database document to new puzzle
+    let now = moment();
+      if(puzzleResponse.data.board){
+        PuzzleSchema.updateOne({'_id':myObjectID},{ 
+          $set: {
+            currentPuzzle: puzzleResponse.data.board,
+            initialPuzzle: puzzleResponse.data.board,
+            date: now.format()
+          } },
+        function(err){
+          if (err) throw err;
+          console.log("1 document updated");
+          return
+        })
+      }
 }
 
 module.exports = router;

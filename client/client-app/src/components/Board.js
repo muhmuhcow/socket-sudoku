@@ -19,13 +19,13 @@ const Board = ({ data,
                 }) => {
 
     const buttonArray = [1,2,3,4,5,6,7,8,9];
-    var rowNumber = 0;
-    console.log(initialPuzzle);                 
+    var rowNumber = 0;                 
     return (
         <div style={{display:'flex',justifyContent:'center',flexDirection:'column',textAlign:'center'}}>
             {/* <h1> Board </h1> */}
                 <div className='Board'>
-                    {//for each row   
+                    {//for each row  
+                        data ? 
                         Array.prototype.map.call(data, row => {
                             rowNumber=rowNumber+1;
                             return (<Row 
@@ -40,7 +40,7 @@ const Board = ({ data,
                                     errorStack={errorStack}
                                     initialPuzzle={initialPuzzle}
                                     />)
-                        })
+                        }) : null
                     }
                 </div>
                 <div className="OptionsContainer">

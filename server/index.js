@@ -11,7 +11,7 @@ const db = require('./database/db.js');
 var cors = require('cors');
 var PuzzleSchema = require("./database/PuzzleSchema.js");
 var mongo = require('mongodb');
-var myObjectID = new mongo.ObjectID("5ed394f7633d0c136afc52a8");
+var myObjectID = new mongo.ObjectID("5ed73eca79f3924b506d21c9");
 
 
 app.use(cors());
@@ -44,6 +44,15 @@ io.of('/puzzle')
 
     socket.on('nameRequest', ({nameRequest})=>{
       socket.broadcast.emit('myNameRequest',"namePls");
+    });
+    socket.on('resetInitial', ({data})=>{
+      if(data){
+        PuzzleSchema.updateOne({'_id':myObjectID},{ $set: {initialPuzzle: data,currentPuzzle:data} },
+        function(err){
+          if (err) throw err;
+          console.log("1 document updated");
+        })
+      }
     });
     socket.on('disconnect',()=>{
       console.log('user disconnected')
