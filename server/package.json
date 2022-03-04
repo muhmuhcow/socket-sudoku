@@ -20,5 +20,8 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.3",
     "socket.io": "^2.3.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
